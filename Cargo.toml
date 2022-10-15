@@ -13,6 +13,8 @@ eframe = { version = "0.19.0", features = ["persistence"] }
 serde = { version = "1", features = ["derive"] } # You only need this if you want app persistence
 console_error_panic_hook = "0.1.6"
 tracing-wasm = "0.2"
+wasm-bindgen-futures = "0.4.33"
+rfd = { version = "0.10.0", features = ["file-handle-inner"] }
 
 [profile.release]
 opt-level = 2 # fast and small wasm
