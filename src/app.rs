@@ -2,12 +2,8 @@ use bwavfile::WaveReader;
 use egui::epaint::{Color32, Stroke};
 use rfd::FileHandle;
 
-// pub enum Message {
-//     FileOpen(std::path::PathBuf),
-// }
-
 #[derive(serde::Deserialize, serde::Serialize)]
-#[serde(default)] // if we add new fields, give them default values when deserializing old state
+#[serde(default)]
 pub struct MetadazioApp {
     #[serde(skip)]
     filename: String,
@@ -60,6 +56,8 @@ impl MetadazioApp {
         });
     }
 
+    fn read_file(&mut self) {}
+
     fn render_sidepanel(&mut self, ctx: &egui::Context) {
         egui::SidePanel::left("side_panel")
             .frame(
@@ -77,10 +75,6 @@ impl MetadazioApp {
                     self.open_file_dialog();
                 }
                 ui.add_space(15.0);
-                if ui
-                    .add_sized([120.0, 60.0], egui::Button::new("Parse metadata"))
-                    .clicked()
-                {}
             });
     }
 
