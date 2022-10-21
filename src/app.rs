@@ -100,17 +100,12 @@ impl eframe::App for MetadazioApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         ctx.request_repaint();
 
-        loop {
-            match self.filehandle_channel.1.try_recv() {
-                Ok(mes) => {
-                    self.filename = mes.file_name();
-                    // let file = mes.inner();
-                    // self.filepath = file
-                }
-                Err(_) => {
-                    break;
-                }
+        let result = self.filehandle_channel.1.try_recv();
+        match result {
+            Ok(handle) => {
+                self.filename = handle.file_name();
             }
+            Err(_) => {}
         }
 
         self.render_sidepanel(ctx);
